@@ -1,0 +1,336 @@
+@import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;600;700&family=Space+Mono:wght@400;700&display=swap');
+
+/* ── Reset & Base ─────────────────────────────────────── */
+*, *::before, *::after { box-sizing: border-box; }
+
+body {
+  margin: 0;
+  font-family: 'Space Grotesk', Arial, sans-serif;
+  color: #fff;
+  overflow-x: hidden;
+  background: #0a0a0f;
+}
+
+/* ── Three.js Canvas ──────────────────────────────────── */
+#canvas-container {
+  position: fixed;
+  top: 0; left: 0;
+  width: 100%; height: 100%;
+  z-index: -1;
+}
+
+/* ── Header ───────────────────────────────────────────── */
+header {
+  text-align: center;
+  padding: 60px 20px 20px;
+}
+
+header h1 {
+  font-family: 'Space Mono', monospace;
+  font-size: clamp(2.2rem, 6vw, 4rem);
+  font-weight: 700;
+  letter-spacing: -1px;
+  margin: 0 0 8px;
+  color: #fff;
+  text-shadow: 0 0 40px rgba(107,44,255,0.6);
+}
+
+header > p {
+  font-size: 1.1rem;
+  color: #00e5ff;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  font-family: 'Space Mono', monospace;
+  margin: 0 0 32px;
+}
+
+/* ── Snap Button ──────────────────────────────────────── */
+#snapButton {
+  display: inline-block;
+  padding: 14px 36px;
+  font-size: 1rem;
+  font-family: 'Space Mono', monospace;
+  font-weight: 700;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  background: #6b2cff;
+  color: #fff;
+  border: 3px solid #fff;
+  border-radius: 0;
+  cursor: pointer;
+  box-shadow: 5px 5px 0 #00e5ff;
+  transition: transform 0.12s, box-shadow 0.12s;
+}
+#snapButton:hover {
+  transform: translate(3px, 3px);
+  box-shadow: 2px 2px 0 #00e5ff;
+}
+
+/* ── Music Toggle ─────────────────────────────────────── */
+.music-btn {
+  position: fixed;
+  bottom: 30px;
+  right: 30px;
+  z-index: 1000;
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  background: #00e5ff;
+  border: 3px solid #000;
+  color: #0a0a0f;
+  font-size: 1.2rem;
+  cursor: pointer;
+  box-shadow: 4px 4px 0 #ff2d78;
+  transition: transform 0.12s, box-shadow 0.12s;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.music-btn:hover {
+  transform: translate(2px, 2px);
+  box-shadow: 2px 2px 0 #ff2d78;
+}
+.music-btn.muted {
+  background: #ff2d78;
+  box-shadow: 4px 4px 0 #00e5ff;
+}
+.music-btn.muted:hover {
+  box-shadow: 2px 2px 0 #00e5ff;
+}
+
+/* ── Section Base ─────────────────────────────────────── */
+section {
+  max-width: 860px;
+  margin: 0 auto;
+  padding: 60px 24px;
+}
+
+section h2 {
+  font-family: 'Space Mono', monospace;
+  font-size: clamp(1.6rem, 4vw, 2.4rem);
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  border-left: 5px solid #00e5ff;
+  padding-left: 16px;
+  margin-bottom: 28px;
+  color: #fff;
+}
+
+/* ── About ────────────────────────────────────────────── */
+#about p {
+  font-size: 1.1rem;
+  line-height: 1.8;
+  color: #ccc;
+  background: rgba(0,229,255,0.04);
+  border: 1px solid rgba(0,229,255,0.15);
+  padding: 24px;
+}
+
+/* ── Skills ───────────────────────────────────────────── */
+#skills ul {
+  list-style: none;
+  padding: 0;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin: 0;
+}
+#skills li {
+  font-family: 'Space Mono', monospace;
+  font-size: 0.85rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  padding: 12px 20px;
+  background: #111;
+  border: 2px solid #333;
+  color: #fff;
+  transition: border-color 0.2s, color 0.2s;
+  cursor: default;
+}
+#skills li:hover {
+  border-color: #00e5ff;
+  color: #00e5ff;
+}
+
+/* ── Projects ─────────────────────────────────────────── */
+.projects {
+  max-width: 1000px;
+  margin: 0 auto;
+  padding: 40px 24px;
+}
+.projects h2 {
+  font-family: 'Space Mono', monospace;
+  font-size: clamp(1.6rem, 4vw, 2.4rem);
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  border-left: 5px solid #00e5ff;
+  padding-left: 16px;
+  margin-bottom: 36px;
+  color: #fff;
+}
+.cards-row {
+  display: flex;
+  gap: 24px;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+.card {
+  width: 270px;
+  padding: 24px;
+  background: rgba(17,17,17,0.85);
+  border: 2px solid #333;
+  border-radius: 0;
+  backdrop-filter: blur(12px);
+  transition: border-color 0.2s, box-shadow 0.2s, transform 0.2s;
+  cursor: pointer;
+  box-shadow: 4px 4px 0 transparent;
+}
+.card:hover {
+  border-color: #6b2cff;
+  box-shadow: 4px 4px 0 #6b2cff;
+  transform: translate(-2px, -2px);
+}
+.card h3 {
+  font-family: 'Space Mono', monospace;
+  font-size: 1rem;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  color: #00e5ff;
+  margin: 0 0 10px;
+}
+.card p {
+  font-size: 0.9rem;
+  color: #aaa;
+  margin: 0;
+  line-height: 1.6;
+}
+
+/* ── Resume ───────────────────────────────────────────── */
+#resume {
+  text-align: center;
+  padding: 70px 24px;
+}
+#resume h2 {
+  border-left: none;
+  padding-left: 0;
+  text-align: center;
+  margin-bottom: 36px;
+}
+#resume h2 span {
+  color: #00e5ff;
+}
+.resume-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+  padding: 20px 48px;
+  font-family: 'Space Mono', monospace;
+  font-size: 1rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 3px;
+  text-decoration: none;
+  color: #0a0a0f;
+  background: #00e5ff;
+  border: 3px solid #000;
+  border-radius: 0;
+  box-shadow: 6px 6px 0 #ff2d78;
+  transition: transform 0.12s, box-shadow 0.12s;
+}
+.resume-btn:hover {
+  transform: translate(4px, 4px);
+  box-shadow: 2px 2px 0 #ff2d78;
+}
+.resume-btn i {
+  font-size: 1.2rem;
+}
+
+/* ── Contact / Socials ────────────────────────────────── */
+#contact {
+  text-align: center;
+  padding: 60px 24px 100px;
+}
+#contact h2 {
+  border-left: none;
+  padding-left: 0;
+  text-align: center;
+  margin-bottom: 12px;
+}
+#contact h2 span { color: #00e5ff; }
+.contact-sub {
+  color: #888;
+  font-size: 0.95rem;
+  margin-bottom: 40px;
+  font-family: 'Space Mono', monospace;
+}
+.socials {
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+  flex-wrap: wrap;
+}
+.social-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  padding: 18px 36px;
+  font-family: 'Space Mono', monospace;
+  font-size: 0.9rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  text-decoration: none;
+  border: 3px solid #000;
+  border-radius: 0;
+  transition: transform 0.12s, box-shadow 0.12s;
+  cursor: pointer;
+}
+.social-btn:hover {
+  transform: translate(4px, 4px);
+}
+.social-btn i { font-size: 1.3rem; }
+
+/* GitHub button */
+.social-btn.github {
+  color: #0a0a0f;
+  background: #00e5ff;
+  box-shadow: 6px 6px 0 #ff2d78;
+}
+.social-btn.github:hover { box-shadow: 2px 2px 0 #ff2d78; }
+
+/* LinkedIn button */
+.social-btn.linkedin {
+  color: #0a0a0f;
+  background: #ffe600;
+  box-shadow: 6px 6px 0 #ff2d78;
+}
+.social-btn.linkedin:hover { box-shadow: 2px 2px 0 #ff2d78; }
+
+/* Instagram button */
+.social-btn.instagram {
+  color: #fff;
+  background: #6b2cff;
+  box-shadow: 6px 6px 0 #00e5ff;
+}
+.social-btn.instagram:hover { box-shadow: 2px 2px 0 #00e5ff; }
+
+/* Footer line */
+.footer-line {
+  margin-top: 80px;
+  text-align: center;
+  color: #444;
+  font-family: 'Space Mono', monospace;
+  font-size: 0.75rem;
+  letter-spacing: 4px;
+  text-transform: uppercase;
+}
+
+/* ── Snap animation (legacy) ──────────────────────────── */
+.snap-effect { animation: snap 1s forwards; }
+@keyframes snap {
+  0%  { opacity: 1; }
+  100%{ opacity: 0; }
+}
